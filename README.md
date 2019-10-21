@@ -1,4 +1,5 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Build Status](https://travis-ci.org/gleb-kosteiko/latepost-scheduler.svg?branch=master)](https://travis-ci.org/gleb-kosteiko/latepost-scheduler)
 
 # Late Post Scheduler
 
