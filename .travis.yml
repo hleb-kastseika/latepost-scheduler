@@ -1,9 +1,22 @@
+sudo: false
 language: java
-jdk: openjdk8
+
+cache:
+  directories:
+    - $HOME/.m2
+
+before_install:
+- wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+
+matrix:
+  include:
+  # GraalVM
+    - env: JDK='GraalVM 19'
+      install: . ./install-jdk.sh --url "https://github.com/oracle/graal/releases/download/vm-19.2.0/graalvm-ce-linux-amd64-19.2.0.tar.gz"
 
 script:
-  mvn clean package
-  
+  - mvn clean package
+
 notifications:
   email:
     on_success: never
