@@ -29,3 +29,6 @@ docker build -f src/main/docker/Dockerfile.native -t latepost-scheduler .
 ```
 docker run -i --rm -p 8080:8080 latepost-scheduler
 ```
+
+## Swagger page
+http://localhost:8080/swagger-ui/
