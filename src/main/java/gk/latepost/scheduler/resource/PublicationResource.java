@@ -6,15 +6,18 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
+import javax.ws.rs.core.Response;
+
+import static javax.ws.rs.core.Response.Status.CREATED;
+import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 
 /**
  * PublicationResource class.
@@ -33,37 +36,44 @@ public class PublicationResource {
     private PublicationService publicationService;
 
     @GET
-    @Path("/hello")
-    public String hello() {
-        return "hello";
-    }
-
-    @GET
-    public List<Publication> getAll() {
-        return publicationService.getAll();
+    public Response getAll() {
+        return Response
+                .ok(publicationService.getAll())
+                .build();
     }
 
     @GET
     @Path("/{id}")
-    public Publication get(@PathParam("id") long id) {
-        return publicationService.get(id);
+    public Response get(@PathParam("id") long id) {
+        Publication publication = publicationService.get(id);
+        if (publication != null) {
+            return Response.ok(publication).build();
+        }
+        return Response
+                .status(NOT_FOUND)
+                .build();
     }
 
     @POST
-    public Publication create(Publication publication) {
-        return publicationService.create(publication);
+    public Response create(Publication publication) {
+        return Response
+                .status(CREATED)
+                .entity(publicationService.create(publication))
+                .build();
     }
 
     @PUT
     @Path("/{id}")
-    public Publication update(@PathParam("id") long id, Publication publication) {
-        return publicationService.update(publication);
+    public Response update(@PathParam("id") long id, Publication publication) {
+        return Response
+                .ok(publicationService.update(publication))
+                .build();
     }
 
     @DELETE
     @Path("/{id}")
-    public void delete(@PathParam("id") long id) {
+    public Response delete(@PathParam("id") long id) {
         publicationService.delete(id);
+        return Response.noContent().entity("").build();
     }
-    //todo search by text
 }
