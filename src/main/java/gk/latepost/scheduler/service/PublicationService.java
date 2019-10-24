@@ -30,7 +30,9 @@ public class PublicationService {
 
     public Publication update(Publication publication) {
         publication = repository.update(publication);
-        //scheduleService.schedule(publication); //todo reschedule
+        scheduleService.unschedule(publication.id);
+        scheduleService.schedule(publication);
+
         return publication;
     }
 

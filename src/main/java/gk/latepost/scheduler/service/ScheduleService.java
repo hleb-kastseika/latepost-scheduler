@@ -44,21 +44,11 @@ public class ScheduleService {
     private Scheduler scheduler;
     @Inject
     private PublicationRepository repository;
-//
-//    public void init(@Observes @Initialized(ApplicationScoped.class) Object init) {
-//        LOGGER.info("~~~~~~~~~~~~~~~~~~`` init");
-//    }
 
     @PostConstruct
-    public void startSchedluler() throws SchedulerException {
+    private void startScheduler() throws SchedulerException {
         scheduler = new StdSchedulerFactory().getScheduler();
         scheduler.start();
-
-        //todo run on app starts after all other beans created
-//        for (Publication publication : repository.getAll()) {
-//            schedule(publication);
-//        }
-//        LOGGER.info("Stored publications were scheduled");
     }
 
     public void schedule(Publication publication) {

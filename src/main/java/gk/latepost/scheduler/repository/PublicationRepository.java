@@ -27,13 +27,16 @@ public class PublicationRepository {
     public Publication update(Publication publication) {
         Publication entity = Publication.findById(publication.id);
         entity.setText(publication.getText());
+        entity.setDatetime(publication.getDatetime());
         return publication;
     }
 
     @Transactional
     public void delete(long id) {
         Publication publication = Publication.findById(id);
-        publication.delete();
+        if (publication != null) {
+            publication.delete();
+        }
     }
 
     public Publication get(long id) {
