@@ -17,28 +17,28 @@ import java.util.List;
  */
 @ApplicationScoped
 public class PublicationService {
-    @Inject
-    private ScheduleService scheduleService;
+//    @Inject
+//    private ScheduleService scheduleService;
     @Inject
     private PublicationRepository repository;
 
     public Publication create(Publication publication) {
         publication = repository.save(publication);
-        scheduleService.schedule(publication);
+//        scheduleService.schedule(publication);
         return publication;
     }
 
     public Publication update(Publication publication) {
         publication = repository.update(publication);
-        scheduleService.unschedule(publication.id);
-        scheduleService.schedule(publication);
+//        scheduleService.unschedule(publication.id);
+//        scheduleService.schedule(publication);
 
         return publication;
     }
 
     public void delete(long id) {
         repository.delete(id);
-        scheduleService.unschedule(id);
+//        scheduleService.unschedule(id);
     }
 
     public Publication get(long id) {
