@@ -4,6 +4,7 @@ import gk.latepost.scheduler.model.Publication;
 import gk.latepost.scheduler.quartz.PublicationJob;
 
 import gk.latepost.scheduler.repository.PublicationRepository;
+import io.quarkus.runtime.StartupEvent;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobDataMap;
@@ -19,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -45,10 +47,14 @@ public class ScheduleService {
     @Inject
     private PublicationRepository repository;
 
-    @PostConstruct
-    private void startScheduler() throws SchedulerException {
+    //@PostConstruct
+    private void onStart(@Observes StartupEvent ev) throws SchedulerException {
         scheduler = new StdSchedulerFactory().getScheduler();
         scheduler.start();
+
+        for (Publication publication : repository.getAll()) {
+            schedule(publication);
+        }
     }
 
     public void schedule(Publication publication) {
@@ -63,6 +69,7 @@ public class ScheduleService {
                 .build();
         try {
             scheduler.scheduleJob(jobDetail, trigger);
+            LOGGER.info("Quartz job was scedulled " + publication.id);
         } catch (SchedulerException e) {
             LOGGER.error(e.toString());
         }

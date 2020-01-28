@@ -1,9 +1,12 @@
 package gk.latepost.scheduler.model;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Publication class.
@@ -14,7 +17,10 @@ import javax.persistence.Entity;
  * @author Gleb Kosteiko
  */
 @Entity
-public class Publication extends PanacheEntity {
+public class Publication extends PanacheEntityBase {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
     private String text;
     private LocalDateTime datetime;
 

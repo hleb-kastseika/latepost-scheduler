@@ -47,7 +47,9 @@ public class PublicationResource {
     public Response get(@PathParam("id") long id) {
         Publication publication = publicationService.get(id);
         if (publication != null) {
-            return Response.ok(publication).build();
+            return Response
+                    .ok(publication)
+                    .build();
         }
         return Response
                 .status(NOT_FOUND)
@@ -74,6 +76,8 @@ public class PublicationResource {
     @Path("/{id}")
     public Response delete(@PathParam("id") long id) {
         publicationService.delete(id);
-        return Response.noContent().entity("").build();
+        return Response
+                .noContent()
+                .build();
     }
 }
