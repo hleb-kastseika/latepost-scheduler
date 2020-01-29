@@ -15,7 +15,7 @@ matrix:
       install: . ./install-jdk.sh --url "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.1/graalvm-ce-java8-linux-amd64-19.3.1.tar.gz"
 
 script:
-  - mvn package -Pnative -Dquarkus.native.additional-build-args=-H:--initialize-at-run-time=java.rmi.server.ObjID,sun.rmi.transport.ObjectTable,sun.rmi.transport.Transport,sun.rmi.transport.tcp.TCPEndpoint,sun.rmi.registry.RegistryImpl,sun.rmi.transport.DGCImpl,sun.rmi.transport.DGCClient
+  - mvn package -Pnative -Dnative-image.docker-build=true -Dquarkus.native.additional-build-args=-H:--initialize-at-run-time=java.rmi.server.ObjID,sun.rmi.transport.ObjectTable,sun.rmi.transport.Transport,sun.rmi.transport.tcp.TCPEndpoint,sun.rmi.registry.RegistryImpl,sun.rmi.transport.DGCImpl,sun.rmi.transport.DGCClient
 
 notifications:
   email:
