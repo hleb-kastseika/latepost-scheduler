@@ -16,8 +16,7 @@ matrix:
 
 script:
   - mvn package
-  - native-image --initialize-at-run-time=java.rmi.server.ObjID,sun.rmi.transport.ObjectTable,sun.rmi.transport.Transport,sun.rmi.transport.tcp.TCPEndpoint,sun.rmi.registry.RegistryImpl,sun.rmi.transport.DGCImpl,sun.rmi.transport.DGCClient -jar target/latepost-scheduler-0.1-SNAPSHOT-runner.jar
-
+  
 notifications:
   email:
     on_success: never
