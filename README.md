@@ -1,5 +1,6 @@
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Build Status](https://travis-ci.org/gleb-kosteiko/latepost-scheduler.svg?branch=master)](https://travis-ci.org/gleb-kosteiko/latepost-scheduler)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&identifier=216210184)](https://dependabot.com)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 # Late Post Scheduler
 
